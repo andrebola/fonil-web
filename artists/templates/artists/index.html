@@ -1,0 +1,42 @@
+{% extends "artists/base.html" %}
+
+{% block content %}
+<section class="vbox" >
+  <section class="w-f-md" id="bjax-target">
+      <section class="hbox stretch">
+                <section>
+                  <section class="vbox">
+                    <section class="scrollable padder-lg">
+                     <h2 class="font-thin m-b">Discover <span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
+                        <span class="bar1 a1 bg-primary lter"></span>
+                        <span class="bar2 a2 bg-info lt"></span>
+                        <span class="bar3 a3 bg-success"></span>
+                        <span class="bar4 a4 bg-warning dk"></span>
+                        <span class="bar5 a5 bg-danger dker"></span>
+                      </span></h2>
+                      <div class="row row-sm">
+                        {% for a in artists.all %}
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                          <div class="item">
+                            <div class="pos-rlt">
+                              <div class="item-overlay opacity r r-2x bg-black">
+                                <div class="center text-center m-t-n">
+                                  <a href="{% url 'artists-artist' a.uuid %}"><i class="fa fa-play-circle i-2x"></i></a>
+                                </div>
+                              </div>
+                              <a href="{% url 'artists-artist' a.uuid %}"><img src="{{ a.image }}" alt="" class="r r-2x img-full"></a>
+                            </div>
+                            <div class="padder-v">
+                              <a href="{% url 'artists-artist' a.uuid %}" class="text-ellipsis">{{a.name}}</a>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </section>                    
+                  </section>
+                </section>
+      </section>
+  </section>
+</section>
+{% endblock %}

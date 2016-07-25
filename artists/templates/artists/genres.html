@@ -1,0 +1,54 @@
+{% extends "artists/base.html" %}
+
+{% block content %}
+<section class="vbox" >
+  <section class="w-f-md" id="bjax-target">
+      <section class="hbox stretch">
+             <!-- side content -->
+                <aside class="aside bg-light dk" id="sidebar">
+                  <section class="vbox animated fadeInUp">
+                    <section class="scrollable hover">
+                      <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
+                        <a href="{% url "artists-genres" %}" class="list-group-item {% if all_genres %}active{% endif %}">
+                          All
+                        </a>
+                        {% for g in genres.all %}
+                        <a href="{% url "artists-genre" g.id %}" class="list-group-item {% if g.id == genre.id %}active{% endif %}">
+                            {{g.name}}
+                          </a>
+                        {% endfor %}
+                      </div>
+                    </section>
+                  </section>
+                </aside>
+                <!-- / side content -->
+                <section>
+                  <section class="vbox">
+                    <section class="scrollable padder-lg">
+                      <h2 class="font-thin m-b">{{genre.name}}</h2>
+                      <div class="row row-sm">
+                        {% for a in artists.all %}
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                          <div class="item">
+                            <div class="pos-rlt">
+                              <div class="item-overlay opacity r r-2x bg-black">
+                                <div class="center text-center m-t-n">
+                                  <a href="{% url 'artists-artist' a.uuid %}"><i class="fa fa-play-circle i-2x"></i></a>
+                                </div>
+                              </div>
+                              <a href="{% url 'artists-artist' a.uuid %}"><img src="{{ a.image }}" alt="" class="r r-2x img-full"></a>
+                            </div>
+                            <div class="padder-v">
+                              <a href="{% url 'artists-artist' a.uuid %}" class="text-ellipsis">{{a.name}}</a>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </section>                    
+                  </section>
+                </section>
+      </section>
+  </section>
+</section>
+{% endblock %}

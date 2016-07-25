@@ -1,0 +1,89 @@
+{% extends "artists/base.html" %}
+
+{% block content %}
+<section class="vbox" id="bjax-el">
+    <section class="scrollable wrapper-lg">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="panel wrapper-lg">
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <img src="{{artist.image}}" class="img-full m-b">
+                      </div>
+                      <div class="col-sm-7">
+                        <h2 class="m-t-none text-black">{{ artist.name }}</h2>
+                        <div class="clearfix m-b-lg">
+                          <div class="clear">
+                            <small class="block text-muted">{{artist.followers}} followers</small>
+                          </div>
+                        </div>
+                        <!--<div class="m-b-lg">
+                          <a href="#" class="btn btn-info">Play</a> <a href="#" class="btn btn-default">3 Comments</a>
+                          </div>-->
+                        <div>
+                          {% if artist.genres.all %}Genres:
+                            {% for genre in artist.genres.all %}
+                            <a href="{% url "artists-genre" genre.id %}" class="badge bg-light">{{genre.name}}</a> 
+                            {% endfor %}
+                          {%endif%}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="m-t">
+                      {% if artist.description %}
+                      <p>{{artist.description}}</p>
+                      {%endif%}
+                    </div>
+                    <h4 class="m-t-lg m-b">Links</h4>
+                    {% for link in artist.link_set.all %}
+                    <ul class="list-group list-group-lg">
+                      <li class="list-group-item">
+                        <a href="{{link.url}}" class="m-r-sm pull-left" target="_blank">
+                          <i class="icon-control-play text"></i>
+                          <i class="icon-control-pause text-active"></i>
+                        </a>
+                        <div class="clear text-ellipsis">
+                          <span>{{link.name}}</span>
+                          <span class="text-muted"> </span>
+                        </div>
+                      </li> 
+                    </ul>
+                    {% endfor%}
+                    <h4 class="m-t-lg m-b">Posts</h4>
+                    {% for post in artist.post_set.all %}
+                    <section class="comment-list block">
+                      <article id="comment-id-1" class="comment-item">
+                        <section class="comment-body m-b">
+                          <header>
+                            <span class="text-muted text-xs block m-t-xs">
+                              {{ post.date}}
+                            </span>
+                          </header>
+                          <div class="m-t-sm">{{post.text}}</div>
+                        </section>
+                      </article>
+                    </section>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Suggestions</div>
+                    <div class="panel-body">
+                      {% for similar in artist.similar.all %}
+                      <article class="media">
+                        <a href="{% url 'artists-artist' similar.uuid %}" class="pull-left thumb-md m-t-xs">
+                          <img src="{{similar.image}}">
+                        </a>
+                        <div class="media-body">                        
+                          <a href="{% url 'artists-artist' similar.uuid %}" class="font-semibold">{{ similar.name }}</a>
+                        </div>
+                      </article>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+        </section>
+{% endblock %}
