@@ -49,21 +49,6 @@
                       </li> 
                     </ul>
                     {% endfor%}
-                    <h4 class="m-t-lg m-b">Posts</h4>
-                    {% for post in artist.post_set.all %}
-                    <section class="comment-list block">
-                      <article id="comment-id-1" class="comment-item">
-                        <section class="comment-body m-b">
-                          <header>
-                            <span class="text-muted text-xs block m-t-xs">
-                              {{ post.date}}
-                            </span>
-                          </header>
-                          <div class="m-t-sm">{{post.text}}</div>
-                        </section>
-                      </article>
-                    </section>
-                    {% endfor %}
                   </div>
                 </div>
                 <div class="col-sm-4">
